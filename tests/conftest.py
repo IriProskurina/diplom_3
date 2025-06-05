@@ -19,27 +19,3 @@ def user():
     u = register_user()
     yield u               # u -- объект User
     delete_user(u.access_token)
-
-@pytest.fixture()
-def designer_page(driver):
-    return DesignerPage(driver)
-
-@pytest.fixture()
-def login_page(driver):
-    return LoginPage(driver)
-
-@pytest.fixture()
-def recovery_page(driver):
-    return RecoveryPage(driver)
-
-@pytest.fixture
-def header_page(driver):
-    return HeaderPage(driver)
-
-@pytest.fixture
-def account_page(driver):
-    return AccountPage(driver)
-
-@pytest.fixture
-def order_feed_page(driver):
-    return OrderFeedPage(driver)

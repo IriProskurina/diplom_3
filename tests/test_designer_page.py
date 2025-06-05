@@ -1,6 +1,3 @@
-from selenium.webdriver.support import expected_conditions as EC
-import allure
-from selenium.common import TimeoutException
 import allure
 import pytest
 
@@ -9,7 +6,6 @@ from pages.designer_page import DesignerPage
 from locators.designer_page_locators import DesignerPageLocators
 
 class TestDesignerPage:
-
     @allure.title("Простой тест")
     def test_open_ingredient_modal_window(self, driver):
         designer_page = DesignerPage(driver)
@@ -32,11 +28,12 @@ class TestDesignerPage:
         counter_before = int(designer_page.get_ingredient_count())
         designer_page.drag_ingredient_to_basket(DesignerPageLocators.INGREDIENT_LOCATOR)
         counter_after = int(designer_page.get_ingredient_count())
-        assert counter_after == counter_before + 1, \
-            f"Счётчик не увеличился: до {counter_before}, после {counter_after}"
+        assert counter_after == counter_before + 1, (
+            f"Счётчик не увеличился: до {counter_before}, после {counter_after}")
 
     @allure.title("Авторизированный пользователь может сделать заказ")
-    def test_authorized_user_should_make_order(self, driver, user, login_page):
+    def test_authorized_user_should_make_order(self, driver, user):
+        login_page = LoginPage(driver)
         designer_page = DesignerPage(driver)
         login_page.open_login_page()
         login_page.authorize_user(user.login, user.password)
