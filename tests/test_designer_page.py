@@ -36,9 +36,11 @@ class TestDesignerPage:
         login_page = LoginPage(driver)
         designer_page = DesignerPage(driver)
         login_page.open_login_page()
-        login_page.authorize_user(user.login, user.password)
-
-
+        login_page.authorize_user(login=user.login, password=user.password)
+        designer_page.open_design_page()
+        designer_page.drag_ingredient_to_basket(DesignerPageLocators.INGREDIENT_LOCATOR)
+        designer_page.click_to_make_order_button()
+        assert designer_page.check_order_confirmation()
     @allure.title("Клик по ингредиенту вызывает модальное окно")
     def test_click_ingredient(self, driver):
         designer_page = DesignerPage(driver)
